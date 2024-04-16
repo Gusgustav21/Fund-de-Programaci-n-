@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <math.h>
+#include <conio.h>
+
+int Sumamatriz(int Mt[100][100], int a, int b, int d);
+
+int main()
+{
+    int Mat[100][100];
+    int j, n, m, resp, k, l, z;
+    printf("Filas de la matriz: ");
+    scanf("%i", &n);
+    printf("\nColumnas de la matriz: ");
+    scanf("%i", &m);
+    j = m;
+    z = m * n;
+    for(k = 1; k <= n; k++)
+    {
+        for(l = 1; l <= j; l++)
+        {
+            Mat[k][l] = z;
+            z = z - 1;
+        }
+    }
+    resp = Sumamatriz(Mat, n, m, j);
+    printf("\n\nSí: %i", resp);
+}
+
+int Sumamatriz(int Mt[100][100], int a, int b, int d)
+{
+    int aux;
+    if(a == 1 && b == 1)
+    {
+        aux = Mt[a][b];  
+    }
+    else 
+    {
+        if(b == 1)
+        {
+            aux = Mt[a][b] + Sumamatriz(Mt, a - 1, d, d);
+        }
+        else
+        {
+            aux = Mt[a][b] + Sumamatriz(Mt, a, b - 1, d);
+        }
+    }
+    printf("%i \n", Mt[a][b]);
+    return aux;
+}
